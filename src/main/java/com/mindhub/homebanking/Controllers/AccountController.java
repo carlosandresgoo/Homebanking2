@@ -84,7 +84,7 @@ public class AccountController {
                 return new ResponseEntity<>(HttpStatus.CREATED);
         }
 
-//hola
+
         @PutMapping ("/api/accounts/{id}")
         public ResponseEntity<String> deleteAccount(Authentication authentication,@PathVariable long id) {
                 Client client = clientService.findByEmail(authentication.getName());
