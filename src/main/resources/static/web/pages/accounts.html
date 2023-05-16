@@ -73,6 +73,7 @@
                                     ",")}}</li>
                                 <li><strong>Account creation date:</strong>{{account.creationDate.slice(0,10)}}</li>
                                 <li><strong>Account number:</strong> {{account.number}}</li>
+                                <li><strong>Account type:</strong> {{account.accountType}}</li>
                             </ul>
                             <a :href="'./account.html?id='+account.id"
                                 class="view-transactions d-flex flex-column justify-content-center align-items-center"><img
@@ -86,7 +87,7 @@
             <template v-if="activeAccounts.length !==3">
                 <div class="d-flex justify-content-center align-items-center flex-column my-3">
                     <h2 style="font-size: 1.2rem;">Get a new account here !</h2>
-                    <img class="click" @click="createAccount" type="button" src="../assets/click.png" alt="click"
+                    <img class="click" data-bs-target="#exampleModal4" data-bs-toggle="modal" type="button" src="../assets/click.png" alt="click"
                         title="click">
                 </div>
             </template>
@@ -289,6 +290,33 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                             <button @click="logout" class="btn btn-primary">Sure</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Molda 4 -->
+            <div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel4"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel4">Create an account</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="d-flex justify-content-center align-items-center" @submit.prevent="createAccount">
+                                <div class="form-check">
+                                    <div>
+                                        <label for="corriente" class="pe-5 form-check-label">CURRENT</label>
+                                        <input type="radio" name="accountType" id="corriente" class="form-check-input" value="CURRENT" v-model="accountType" required>
+                                    </div>
+                                    <div>
+                                        <label for="ahorro" class="pe-5 form-check-label">SAVING</label>
+                                        <input type="radio" name="accountType" id="ahorro" class="form-check-input" value="SAVING" v-model="accountType" required>
+                                    </div>                          
+                                </div>                        
+                                <button type="submit" class="btn btn-outline-success mb-3 mt-3 fs-4">Create</button>
+                            </form>                  
                         </div>
                     </div>
                 </div>

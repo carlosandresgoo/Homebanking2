@@ -10,6 +10,7 @@ createApp({
 			email: '',
 			accounts: [],
 			activeAccounts: [],
+			accountType:[],
 			isAsideInactive: true,
 		};
 	},
@@ -41,7 +42,7 @@ createApp({
 				confirmButtonText: 'Sure',
 				showLoaderOnConfirm: true,
 				preConfirm: () => {
-					return axios.post('/api/clients/current/accounts')
+					return axios.post('/api/clients/current/accounts',`accountType=${this.accountType}`)
 						.then(response => window.location.href = "/web/pages/accounts.html")
 						.catch(error => {
 							Swal.fire({

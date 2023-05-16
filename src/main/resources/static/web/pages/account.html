@@ -73,11 +73,16 @@
                         <tbody>
                             <template v-for="datos of transactions">
                                 <tr :class="datos.type">
-                                    <td class="text-center">{{datos.date.slice(0,10)}} at {{datos.date.slice(11,16)}}
-                                    </td>
-                                    <td class="text-center">$ {{datos.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,
-                                        ",")}}
-                                    </td>
+                                    <td class="text-center">{{datos.date.slice(0,10)}} at {{datos.date.slice(11,16)}}</td>
+                                    <template v-if="datos.type == 'CREDIT'">
+                                        <td class="text-center">+ $ {{datos.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,
+                                            ",")}}</td>
+                                        </template>
+                                        <template v-else>
+                                            <td class="text-center">- $ {{datos.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,
+                                                ",")}}</td>
+                                            </template>
+                                    
                                     <td class="text-center">{{datos.description}}</td>
                                     <td class="text-center">{{datos.type}}</td>
                                     <td class="text-center">$ {{datos.balanceAfterTransaction.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,
