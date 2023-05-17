@@ -79,23 +79,28 @@
                                 class="view-transactions d-flex flex-column justify-content-center align-items-center"><img
                                     src="../assets/transactions.png" class="view_transactions text-center"
                                     alt="transactions" title="transactions">View transactions</a>
+                            <div class="d-flex justify-content-center align-items-center flex-column">
+                                <h6>Delete Account</h6>
+                                <button class="delete-account" @click="deleteAccount(account.id)"><img class="delete-account-img text-center"
+                                        src="../assets/delete.png" alt="delete_account"></button>
+                            </div>
                         </div>
                     </div>
-                    <button class="btn-primary" @click="deleteAccount(account.id)">Eliminar</button>
                 </template>
             </div>
             <template v-if="activeAccounts.length !==3">
                 <div class="d-flex justify-content-center align-items-center flex-column my-3">
                     <h2 style="font-size: 1.2rem;">Get a new account here !</h2>
-                    <img class="click" data-bs-target="#exampleModal4" data-bs-toggle="modal" type="button" src="../assets/click.png" alt="click"
-                        title="click">
+                    <img class="click" data-bs-target="#exampleModal4" data-bs-toggle="modal" type="button"
+                        src="../assets/click.png" alt="click" title="click">
                 </div>
             </template>
             <div class="container d-flex justify-content-center align-items-center my-4">
-                <div class="card-loan d-flex justify-content-center align-items-center col-md-6" v-if="loans.length">
+                <div class="card-loan d-flex justify-content-center align-items-center col-md-6"
+                    v-if="loansFilter.length">
                     <div class="d-flex flex-column just align-items-center">
                         <h2 class="my-3">My Loans</h2>
-                        <template v-if="loans.length !==3">
+                        <template v-if="loansFilter.length !==3">
                             <h5 class="text-center my-3"><a href="./loan-application.html">Request a new loan here !
                                 </a></h5>
                             <img class="loan-icon" src="../assets/loan-icon.png" alt="loans">
@@ -104,24 +109,32 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Loan Type</th>
-                                <th>Amount</th>
-                                <th>Payments</th>
+                                <th class="text-center">Loan Type</th>
+                                <th class="text-center">Amount</th>
+                                <th class="text-center">Final amount</th>
+                                <th class="text-center">Payments</th>
+                                <th class="text-center">Pay Loans</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="dato of loans">
-                                <td>{{dato.name}}</td>
-                                <td> $ {{dato.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,
+                            <tr v-for="dato of loansFilter">
+                                <td class="text-center">{{dato.name}}</td>
+                                <td class="text-center"> $ {{dato.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,
                                     ",")}}</td>
-                                <td>{{dato.payments}}</td>
+                                <td class="text-center">$ {{dato.finalAmount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,
+                                    ",")}}</td>
+                                <td class="text-center">{{dato.payments}}</td>
+                                <td class="text-center"><img src="../assets/payLoans.png" class="payLoans"
+                                        data-bs-toggle="modal" data-bs-target="#exampleModal5"
+                                        @click="filterLoan(dato.name)"></td>
                             </tr>
                         </tbody>
                     </table>
+
                 </div>
                 <div class="pt-5 pb-5" v-else>
                     <p class="mb-0 text-light fs-3 text-center">THIS CLIENT DOES NOT HAVE LOANS.</p>
-                    <template v-if="loans.length !==3">
+                    <template v-if="loansFilter.length !==3">
                         <h5 class="text-center my-3"><a href="./loan-application.html">Request a new loan here !
                             </a></h5>
                         <img class="loan-icon" src="../assets/loan-icon.png" alt="loans">
@@ -304,19 +317,64 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form class="d-flex justify-content-center align-items-center" @submit.prevent="createAccount">
+                            <form class="d-flex justify-content-center align-items-center"
+                                @submit.prevent="createAccount">
                                 <div class="form-check">
                                     <div>
                                         <label for="corriente" class="pe-5 form-check-label">CURRENT</label>
-                                        <input type="radio" name="accountType" id="corriente" class="form-check-input" value="CURRENT" v-model="accountType" required>
+                                        <input type="radio" name="accountType" id="corriente" class="form-check-input"
+                                            value="CURRENT" v-model="accountType" required>
                                     </div>
                                     <div>
                                         <label for="ahorro" class="pe-5 form-check-label">SAVING</label>
-                                        <input type="radio" name="accountType" id="ahorro" class="form-check-input" value="SAVING" v-model="accountType" required>
-                                    </div>                          
-                                </div>                        
+                                        <input type="radio" name="accountType" id="ahorro" class="form-check-input"
+                                            value="SAVING" v-model="accountType" required>
+                                    </div>
+                                </div>
                                 <button type="submit" class="btn btn-outline-success mb-3 mt-3 fs-4">Create</button>
-                            </form>                  
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal 5 -->
+            <div class="modal fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel5"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel5">Pay Quota</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="d-flex flex-column justify-content-center align-items-center"
+                                @submit.prevent="payLoan">
+                                <div class="form-check">
+                                    <div>
+                                        <label for="quota" class="pe-5 form-check-label">Pay Quota:
+                                            ${{quotas.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</label>
+                                        <input type="radio" name="Quotas" id="quota" class="form-check-input"
+                                            :value="quotas.toFixed(2)" v-model="amount">
+                                    </div>
+                                    <div>
+                                        <label for="total" class="pe-5 form-check-label">Pay total:
+                                            ${{totalPay.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</label>
+                                        <input type="radio" name="Quotas" id="total" class="form-check-input"
+                                            :value="totalPay.toFixed(2)" v-model="amount">
+                                    </div>
+                                </div>
+                                <div class="mb-3 mt-3 d-flex align-items-center">
+                                    <label for="accountTransfer" class="form-label">Your Account*</label>
+                                    <select class="form-select" aria-label="Default select example" v-model="account"
+                                        required>
+                                        <option selected class="fs-6" value="">Open this select menu</option>
+                                        <template v-for="account of activeAccounts">
+                                            <option :value="account.number" class="fs-6">{{account.number}}</option>
+                                        </template>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-outline-success mb-3 mt-3 fs-4">Pay</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -371,13 +429,13 @@
         </footer>
     </div>
 
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-            crossorigin="anonymous"></script>
-        <script src="../js/accounts.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+    <script src="../js/accounts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

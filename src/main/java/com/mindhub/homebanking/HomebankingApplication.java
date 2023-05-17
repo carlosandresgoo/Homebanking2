@@ -39,10 +39,10 @@ public class HomebankingApplication {
 				Client client1 = new Client("Melba" , "Morel", "melba@gmail.com",passwordEncoder.encode("123"));
 			repository.save(client1);
 
-			Account account1 = new Account("VIN-001" , LocalDateTime.now() , 5000.00,true, AccountType.SAVING );
+			Account account1 = new Account("VIN-001" , LocalDateTime.now() , 2000000000.00,true, AccountType.SAVING );
 			client1.addAccount(account1);
 			repositorys.save(account1);
-			Account account2 = new Account("VIN-002" ,  LocalDateTime.now().plusDays(1) , 7500.00,true, AccountType.CURRENT );
+			Account account2 = new Account("VIN-002" ,  LocalDateTime.now().plusDays(1) , 34000000.00,true, AccountType.CURRENT );
 			client1.addAccount(account2);
 			repositorys.save(account2);
 

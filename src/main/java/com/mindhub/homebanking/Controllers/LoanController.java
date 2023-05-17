@@ -37,7 +37,6 @@ public class LoanController {
     public List<LoanDTO> getLoans() {
         return loanService.getLoanDTO();
     }
-
     @Transactional
     @PostMapping("/api/loans")
     public ResponseEntity<Object> createLoan (@RequestBody LoanApplicationDTO loanApplicationDTO, Authentication authentication){
@@ -77,15 +76,9 @@ public class LoanController {
         }
 
         // Validar que el cliente solo tenga un tipo de préstamo de cada uno de los tres tipos disponibles (mortgage, personal y automobile)
-        for (ClientLoan existingLoan : clientAuthenticated.getClientLoans()) {
-            if (existingLoan.getLoan().getName().equals(loan.getName())) {
-                if (existingLoan.getPayments() == 0){
-                    break; // permitir solicitud si el préstamo anterior fue pagado
-                } else {
-                    if (existingLoan.getPayments() == existingLoan.getPayments()) {
-                        return new ResponseEntity<>("You already have an active loan of this type", HttpStatus.FORBIDDEN);
-                    }
-                }
+        for (ClientLoan clientLoan : clientAuthenticated.getClientLoans()) {
+            if (clientLoan.getLoan().getName().equalsIgnoreCase(loan.getName()) && clientLoan.getFinalAmount() > 0) {
+                return new ResponseEntity<>("You already have a " + loan.getName() + " loan in your account", HttpStatus.FORBIDDEN);
             }
         }
 
@@ -122,6 +115,9 @@ public class LoanController {
         } else if ( client.getAccounts().stream().filter(accounts -> accounts.getNumber().equalsIgnoreCase(account)).collect(toList()).size() == 0 ){
             return new ResponseEntity<>("This account is not yours.", HttpStatus.FORBIDDEN);}
 //      amount parameter
+        if (clientLoan.getFinalAmount() <= 0) {
+            return new ResponseEntity<>("This loan has already been fully paid", HttpStatus.FORBIDDEN);
+        }
         if ( amount < 1 ){
             return new ResponseEntity<>("PLease enter an amount bigger than 0", HttpStatus.FORBIDDEN);
         }  else if ( accountAuthenticated.getBalance() < amount ){
@@ -134,8 +130,10 @@ public class LoanController {
         accountAuthenticated.setBalance( accountAuthenticated.getBalance() - amount );
         clientLoan.setFinalAmount( clientLoan.getFinalAmount() - amount);
 
+
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
 }
 
 

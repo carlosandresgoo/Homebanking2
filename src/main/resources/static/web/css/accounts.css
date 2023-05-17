@@ -413,6 +413,11 @@ form {
     object-fit: contain;
 }
 
+.delete-account-img{
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
 /* card loans */
 .card-loan {
     background-color: #fff;
@@ -469,6 +474,10 @@ body {
 
 h5 a {
     text-decoration: none;
+}
+.payLoans{
+    height: 3rem;
+    width: 3rem;
 }
 
 
