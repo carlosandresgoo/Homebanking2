@@ -30,8 +30,7 @@ public class LoanController {
     LoanService loanService;
     @Autowired
     ClientLoanService clientLoanService;
-    @Autowired
-    private AccountRepository accountRepository;
+
 
     @RequestMapping("/api/loans")
     public List<LoanDTO> getLoans() {

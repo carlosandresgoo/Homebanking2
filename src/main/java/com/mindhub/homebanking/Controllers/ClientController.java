@@ -29,8 +29,6 @@ public class ClientController {
     private ClientService clientService;
     @Autowired
     private AccountService accountService;
-    @Autowired
-    private AccountRepository accountRepository;
 
 
     public String randomNumber(){

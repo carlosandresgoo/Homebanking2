@@ -12,4 +12,6 @@ public interface AccountService {
     AccountDTO getAccountDT0(Long id);
     Account findByNumber(String number);
 
+
+    Account findById(Long id);
 }

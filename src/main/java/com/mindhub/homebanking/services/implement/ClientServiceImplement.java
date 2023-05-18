@@ -42,4 +42,6 @@ public class ClientServiceImplement implements ClientService {
         return repository.findByEmail(authentication.getName());
     }
 
+
+
 }

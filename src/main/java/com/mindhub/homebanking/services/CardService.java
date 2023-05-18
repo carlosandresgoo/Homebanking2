@@ -11,5 +11,5 @@ public interface CardService {
     List<CardDTO> getCardDTO(Authentication authentication);
     void saveCard (Card card);
 
-
+    Card findById(long id);
 }

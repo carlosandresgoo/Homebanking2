@@ -32,12 +32,6 @@ public class CardController {
     private ClientService clientService;
     @Autowired
     private AccountService accountService;
-    @Autowired
-    private CardRepository cardRepository;
-    @Autowired
-    private TransactionRepository transactionRepository;
-    @Autowired
-    private AccountRepository accountRepository;
 
     public int randomNumbercvv(){
         int cardnumber;
@@ -104,13 +98,13 @@ public class CardController {
         if (client == null) {
             return new ResponseEntity<>("You can't delete an account because you're not a client.", HttpStatus.FORBIDDEN);
         }
-        Card card = cardRepository.findById(id);
+        Card card = cardService.findById(id);
         if (card == null) {
             return new ResponseEntity<>("Card not found", HttpStatus.NOT_FOUND);
         }
 
         card.setCardActive(false);
-        cardRepository.save(card);
+        cardService.saveCard(card);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

@@ -52,10 +52,10 @@ public class HomebankingApplication {
 			Transaction transaction2 = new Transaction(TransactionType.DEBIT,3330.37,"HERRAMIENTAS", LocalDateTime.now(),true, account2.getBalance() );
 			account2.addTransaction(transaction2);
 			transaction.save(transaction2);
-			Transaction transaction3 = new Transaction( TransactionType.DEBIT,4203.17,"COMIDA", LocalDateTime.now(),true, account1.getBalance() );
+			Transaction transaction3 = new Transaction( TransactionType.DEBIT,60455.17,"COMIDA", LocalDateTime.now(),true, account1.getBalance() );
 			account1.addTransaction(transaction3);
 			transaction.save(transaction3);
-			Transaction transaction4 = new Transaction(TransactionType.CREDIT,3330.37,"PASAJE", LocalDateTime.now(),true, account2.getBalance() );
+			Transaction transaction4 = new Transaction(TransactionType.CREDIT,8900.37,"PASAJE", LocalDateTime.now(),true, account2.getBalance() );
 			account2.addTransaction(transaction4);
 			transaction.save(transaction4);
 

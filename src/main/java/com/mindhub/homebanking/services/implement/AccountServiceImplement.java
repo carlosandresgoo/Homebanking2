@@ -33,6 +33,13 @@ public class AccountServiceImplement implements AccountService {
     public Account findByNumber(String number) {
         return accountRepository.findByNumber(number);
     }
+
+    @Override
+    public Account findById(Long id) {
+        return accountRepository.findById(id).orElse(null);
+    }
+
+
     @Override
     public AccountDTO getAccountDT0(Long id) {
         return accountRepository.findById(id).map(account -> new AccountDTO(account)).orElse(null);

@@ -424,6 +424,15 @@ main {
     background-color: #383737cc;
     color: white !important;
 }
+.delete-account-img{
+    height: 1.5rem;
+    width: 1.5rem;
+}
+.text-expired{
+    margin-right: 2rem;
+    font-size: .8rem;
+    font-weight: bolder;
+}
 
 /*--------------------------------------------------------boton que lleva al inicio-----------------------------------------------------------*/
 #btn-scroll-top {

@@ -32,10 +32,13 @@ public class CardServiceImplement implements CardService {
         cardRepository.save(card);
     }
 
-
-
-
+    @Override
+    public Card findById(long id) {
+        return cardRepository.findById(id);
     }
+
+
+}
 
 
 

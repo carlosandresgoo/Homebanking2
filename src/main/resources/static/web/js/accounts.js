@@ -76,7 +76,7 @@ createApp({
 						.then(response =>
 							Swal.fire({
 								icon: 'success',
-								text: 'card deletion successful',
+								text: 'Card deletion successful',
 								showConfirmButton: false,
 								timer: 2000,
 							})

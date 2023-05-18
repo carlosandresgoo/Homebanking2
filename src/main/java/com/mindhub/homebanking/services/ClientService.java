@@ -15,4 +15,5 @@ public interface ClientService {
     void saveClient (Client client);
 
     Client getClientAuthenticated(Authentication authentication);
+
 }

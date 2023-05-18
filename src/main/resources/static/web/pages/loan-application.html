@@ -60,8 +60,8 @@
                         <div class="card-body">
                             <h4 class="card-title text-center">{{loan.name}}</h4>
                             <p class="card-text text-center">{{loan.descriptionLoan}}</p>
-                            <p class="card-text text-center">{{loan.interest}}% interest rate.</p>
-                            <p class="card-text fw-bold text-center">Total Amount:
+                            <p class="card-text text-center">{{((loan.interest*100)-100).toFixed(0)}}% interest rate.</p>
+                            <p class="card-text fw-bold text-center">Max Amount:
                                 ${{loan.maxAmount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</p>
                         </div>
                     </div>

@@ -10,6 +10,7 @@ import com.mindhub.homebanking.repositories.ClientRepository;
 import com.mindhub.homebanking.repositories.TransactionRepository;
 import com.mindhub.homebanking.services.AccountService;
 import com.mindhub.homebanking.services.ClientService;
+import com.mindhub.homebanking.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,9 +32,8 @@ public class AccountController {
         @Autowired
         private AccountService accountService;
         @Autowired
-        private AccountRepository accountRepository;
-        @Autowired
-        private TransactionRepository transactionRepository;
+        private TransactionService transactionService;
+
 
         public String randomNumber(){
                 String randomNumber;
@@ -91,7 +91,7 @@ public class AccountController {
                 if (client == null) {
                         return new ResponseEntity<>("You can't delete an account because you're not a client.", HttpStatus.FORBIDDEN);
                 }
-                Account account = accountRepository.findById(id);
+                Account account = accountService.findById(id);
                 if (account == null) {
                         return new ResponseEntity<>("Account not found", HttpStatus.NOT_FOUND);
                 }
@@ -100,12 +100,12 @@ public class AccountController {
                 }
 
                 account.setAccountActive(false);
-                accountRepository.save(account);
+                accountService.saveAccount(account);
 
-                List<Transaction> transactions = transactionRepository.findByAccountId(id);
+                List<Transaction> transactions = transactionService.findById(id);
                 transactions.forEach(transaction -> {
                         transaction.setTransactionActive(false);
-                        transactionRepository.save(transaction);
+                        transactionService.saveTransaction(transaction);
                 });
                 return new ResponseEntity<>(HttpStatus.OK);
         }
