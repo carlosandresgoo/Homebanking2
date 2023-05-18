@@ -12,10 +12,6 @@ createApp({
         }
     },
     methods: {
-        logout(){
-			axios.post("/api/logout")
-			.then(response => window.location.href = "/web/pages/signon.html" )
-		},
         createLoan(){
             Swal.fire({
                 title: 'Are you sure that you want to create this loan?',
@@ -24,13 +20,11 @@ createApp({
                 },
                 showCancelButton: true,
                 confirmButtonText: 'Sure',
-                confirmButtonColor: "#7c601893",
                 preConfirm: () => {
                     return axios.post('/api/loans/manager' , {
                         "name" : this.name,
                         "maxAmount" : this.amount,
                         "payments" : this.checked,
-                        "descriptionLoan" : this.description,
                         "interest" : this.interest
                         })
                         .then(response => {
@@ -39,7 +33,7 @@ createApp({
                                 text: 'You create a new Loan',
                                 showConfirmButton: false,
                                 timer: 2000,
-                            }).then( () => window.location.href="/management/pages/managerLoan.html")
+                            }).then( () => window.location.href="/admin/pages/loansManager.html")
                         })
                         .catch(error => {
                             Swal.fire({
@@ -51,8 +45,11 @@ createApp({
                 },
                 allowOutsideClick: () => !Swal.isLoading()
             })
-
         },
+        logout() {
+			axios.post("/api/logout")
+				.then(response => window.location.href = "/web/pages/signon.html")
+		},
         appearmenu() {
 			this.isAsideInactive = !this.isAsideInactive;
 		},

@@ -108,7 +108,8 @@ public class LoanController {
         if( clientLoan == null ){
             return new ResponseEntity<>("This loan doesn't exist", HttpStatus.FORBIDDEN);
         } else if( client == null){
-            return new ResponseEntity<>("You are not registered as a client", HttpStatus.FORBIDDEN);}
+            return new ResponseEntity<>("You are not registered as a client", HttpStatus.FORBIDDEN);
+        }
 //        account parameter
         if ( account.isBlank() ){
             return new ResponseEntity<>("PLease enter an account", HttpStatus.FORBIDDEN);
@@ -121,7 +122,8 @@ public class LoanController {
         if ( amount < 1 ){
             return new ResponseEntity<>("PLease enter an amount bigger than 0", HttpStatus.FORBIDDEN);
         }  else if ( accountAuthenticated.getBalance() < amount ){
-            return new ResponseEntity<>("Insufficient balance in your account " + accountAuthenticated.getNumber(), HttpStatus.FORBIDDEN);}
+            return new ResponseEntity<>("Insufficient balance in your account " + accountAuthenticated.getNumber(), HttpStatus.FORBIDDEN);
+        }
 
         double initialBalance = accountAuthenticated.getBalance();
 
