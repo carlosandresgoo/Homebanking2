@@ -67,7 +67,7 @@ createApp({
 		},
 		deleteAccount(id) {
 			Swal.fire({
-				title: 'Are you sure you want to delete card?',
+				title: 'Are you sure you want to delete the account?',
 				inputAttributes: { autocapitalize: 'off' },
 				showCancelButton: true,
 				confirmButtonText: 'Sure',

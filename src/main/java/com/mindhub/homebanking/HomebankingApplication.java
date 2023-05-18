@@ -49,29 +49,29 @@ public class HomebankingApplication {
 			Transaction transaction1 = new Transaction( TransactionType.CREDIT,4203.17,"TRAGO", LocalDateTime.now(),true, account1.getBalance() );
 			account1.addTransaction(transaction1);
 			transaction.save(transaction1);
-			Transaction transaction2 = new Transaction(TransactionType.DEBIT,3330.37,"HERRAMIENTAS", LocalDateTime.now(),true, account1.getBalance() );
+			Transaction transaction2 = new Transaction(TransactionType.DEBIT,3330.37,"HERRAMIENTAS", LocalDateTime.now(),true, account2.getBalance() );
 			account2.addTransaction(transaction2);
 			transaction.save(transaction2);
 			Transaction transaction3 = new Transaction( TransactionType.DEBIT,4203.17,"COMIDA", LocalDateTime.now(),true, account1.getBalance() );
 			account1.addTransaction(transaction3);
 			transaction.save(transaction3);
-			Transaction transaction4 = new Transaction(TransactionType.CREDIT,3330.37,"PASAJE", LocalDateTime.now(),true, account1.getBalance() );
+			Transaction transaction4 = new Transaction(TransactionType.CREDIT,3330.37,"PASAJE", LocalDateTime.now(),true, account2.getBalance() );
 			account2.addTransaction(transaction4);
 			transaction.save(transaction4);
 
 
-			Loan loan1 = new Loan("Mortgage", 500000 , mortgage );
+			Loan loan1 = new Loan("Mortgage", 500000 , mortgage,1.2 );
 			loan.save(loan1);
-			Loan loan2 = new Loan("Personal", 100000 , personal );
+			Loan loan2 = new Loan("Personal", 100000 , personal,1.1 );
 			loan.save(loan2);
-			Loan loan3 = new Loan("Automotive", 300000 , automotive);
+			Loan loan3 = new Loan("Automotive", 300000 , automotive,1.3);
 			loan.save(loan3);
 
-			ClientLoan clientLoan1 = new ClientLoan( 400000.00,60, 400000.00+(400000.00*0.2));
+			ClientLoan clientLoan1 = new ClientLoan( 400000.00,60, 400000.00*loan1.getInterest());
 			client1.addClientLoan(clientLoan1);
 			loan1.addClientLoan(clientLoan1);
 			clientloan.save(clientLoan1);
-			ClientLoan clientLoan2 = new ClientLoan( 50000.00,12 , 50000.00+(50000.00*0.2));
+			ClientLoan clientLoan2 = new ClientLoan( 50000.00,12 , 50000.00*loan2.getInterest());
 			client1.addClientLoan(clientLoan2);
 			loan2.addClientLoan(clientLoan2);
 			clientloan.save(clientLoan2);
@@ -110,23 +110,17 @@ public class HomebankingApplication {
 			transaction.save(transaction8);
 
 
-
-			ClientLoan clientLoan3 = new ClientLoan(100000.00, 24,100000.00+(100000.00*0.2) );
-			client2.addClientLoan(clientLoan3);
-			loan2.addClientLoan(clientLoan3);
-			clientloan.save(clientLoan3);
-			ClientLoan clientLoan4 = new ClientLoan(200000.00, 36, 200000.00+(200000.00*0.2)  );
-			client2.addClientLoan(clientLoan4);
-			loan3.addClientLoan(clientLoan4);
-			clientloan.save(clientLoan4);
-
-
 			Card card3 =new Card (client2.getFirtsName() + " " + client2.getLastName( ), CardType.CREDIT, CardColor.SILVER, "5632-9042-4354-4311",986 , LocalDate.now().plusYears(5), LocalDate.now(),true);
 			client2.addCard(card3);
 			cardrepository.save(card3);
 
 
 			repository.save(client1);
+
+
+			//Admin
+			Client client3 = new Client("Admin" , "Admin", "admin@admin.com",passwordEncoder.encode("123"));
+			repository.save(client3);
 
 		};
 	}

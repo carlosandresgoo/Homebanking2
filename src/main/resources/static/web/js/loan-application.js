@@ -7,13 +7,15 @@ createApp({
 			data: [],
 			selectInput: "",
 			checked: "",
-			amount: 0,
+			amount: "",
+			amountModal:0,
 			dataFilter: "",
 			idLoan: "",
 			data2: "",
 			account: "",
 			interestDay: "",
 			amountInterest: 0,
+			payments:"",
 			quotas: 0,
 			isAsideInactive: true,
 		}
@@ -83,6 +85,12 @@ createApp({
 		appearmenu() {
 			this.isAsideInactive = !this.isAsideInactive;
 		},
+		interestRatio(){
+            this.amountModal = this.amount;
+            this.amountInterest = this.amount * 1.2;
+            this.quotas = this.amountInterest / this.selectInput;
+			// this.finalAmount = this.amount*this.dataFilter.interes
+        },
 	},
 }).mount("#app");
 

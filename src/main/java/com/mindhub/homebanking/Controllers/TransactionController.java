@@ -93,6 +93,6 @@ public class TransactionController {
         destinateAccountAuthenticated.setBalance(destinateBalance + amount);
 
         return new ResponseEntity<>(HttpStatus.CREATED);
-    };
+    }
 
 }

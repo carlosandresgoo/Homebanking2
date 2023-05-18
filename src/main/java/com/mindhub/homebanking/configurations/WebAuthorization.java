@@ -23,12 +23,13 @@ public class WebAuthorization {
         http.authorizeRequests()
                 .antMatchers("/web/pages/services.html","/web/pages/contact.html","/web/pages/aboutUs.html","/index.html","/web/pages/signon.html", "/web/pages/register.html","/web/assets/**","/web/css/**","/web/js/register.js", "/web/js/signon.js","/web/js/index.js","/web/js/aboutUs.js").permitAll()
                 .antMatchers(HttpMethod.POST,"/api/login", "/api/logout","/api/clients").permitAll()
-                .antMatchers("/admin/manager.html","/h2-console/**","api/clients").hasAuthority("ADMIN")
-                .antMatchers("/api/clients/current/accounts/{id}","/api/accounts/{id}","/api/cards/{id}","/api/clients/current/accounts", "/api/clients/current","/api/loans","/api/current/loans","/api/clients/current/cards").hasAuthority("CLIENT")
+                .antMatchers("/admin/manager.html","/admin/manager.js","/admin/manager.css","/h2-console/**","/api/clients").hasAuthority("ADMIN")
+                .antMatchers("/api/clients/current/accounts/{id}","/api/accounts/{id}","/api/cards/{id}","/api/clients/current/accounts", "/api/clients/current","/api/loans","/api/current/loans","/api/clients/current/cards").hasAnyAuthority("CLIENT","ADMIN")
                 .antMatchers(HttpMethod.POST,"/api/clients/current/accounts","/api/clients/current/cards","/api/clients/current/transactions", "/api/loans","/api/current/loans" ).hasAnyAuthority("CLIENT", "ADMIN")
-                .antMatchers("/web/js/**").hasAnyAuthority("CLIENT", "ADMIN")
-                .antMatchers("/web/pages/**").hasAnyAuthority("CLIENT", "ADMIN")
+                .antMatchers("/web/js/**","/web/pages/**").hasAnyAuthority("CLIENT", "ADMIN")
                 .antMatchers("/web/pages/payloans.html").hasAuthority("CLIENT")
+                .antMatchers("/api/loans/manager","/api/loans","/admin/pages/**","/admin/css/**","/admin/js/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.POST,"/api/loans/manager").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.PUT,"/api/cards/{id}", "/api/accounts/{id}" ).hasAnyAuthority("CLIENT", "ADMIN")
                 .anyRequest().denyAll();
 

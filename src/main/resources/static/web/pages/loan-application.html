@@ -35,7 +35,7 @@
                             src="../assets/bank account.png" alt="My_Account" title="account">Accounts</a>
                     <a href="./cards.html"><img class="img-card d-flex flex-column align-items-center mx-auto"
                             src="../assets/cards-debit-credit.png" alt="My_Cards" title="Cards"> Cards</a>
-                    <a  href="../pages/transfers.html"><img
+                    <a href="../pages/transfers.html"><img
                             class="img-card d-flex flex-column align-items-center mx-auto" src="../assets/transfers.png"
                             alt="My_Cards" title="Cards"> Transfers</a>
                     <a href="./services.html"><img class="img-services d-flex flex-column align-items-center mx-auto"
@@ -60,7 +60,7 @@
                         <div class="card-body">
                             <h4 class="card-title text-center">{{loan.name}}</h4>
                             <p class="card-text text-center">{{loan.descriptionLoan}}</p>
-                            <p class="card-text text-center">20% interest rate.</p>
+                            <p class="card-text text-center">{{loan.interest}}% interest rate.</p>
                             <p class="card-text fw-bold text-center">Total Amount:
                                 ${{loan.maxAmount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</p>
                         </div>
@@ -283,7 +283,42 @@
                     </div>
                 </div>
             </div>
-
+            <!-- Modal 4 -->
+            <div class="modal see-loans fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Look at the fees charged per month.</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Table</th>
+                                        <th scope="col">Interest</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Total amount without interest</td>
+                                        <td>{{amountModal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total amount with interest</td>
+                                        <td>{{amountInterest.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>quotas value</td>
+                                        <td>{{quotas.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
         <footer class="text-white py-3">
             <div class="container">

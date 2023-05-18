@@ -82,7 +82,7 @@ public class LoanController {
             }
         }
 
-        ClientLoan clientLoan = new ClientLoan(loanApplicationDTO.getAmount() + (loanApplicationDTO.getAmount() * 0.2), loanApplicationDTO.getPayments(), loanApplicationDTO.getAmount());
+        ClientLoan clientLoan = new ClientLoan(loanApplicationDTO.getAmount(), loanApplicationDTO.getPayments(), loanApplicationDTO.getAmount()*loan.getInterest());
         clientLoanService.saveClientLoan(clientLoan);
         loan.addClientLoan(clientLoan);
         clientAuthenticated.addClientLoan(clientLoan);
@@ -93,6 +93,7 @@ public class LoanController {
         accountReceiver.setBalance(accountReceiver.getBalance() + loanApplicationDTO.getAmount());
         transactionService.saveTransaction(transaction);
         accountReceiver.addTransaction(transaction);
+
 
         return new ResponseEntity<>("Loan approved successfully", HttpStatus.CREATED);
     }
@@ -123,13 +124,31 @@ public class LoanController {
         }  else if ( accountAuthenticated.getBalance() < amount ){
             return new ResponseEntity<>("Insufficient balance in your account " + accountAuthenticated.getNumber(), HttpStatus.FORBIDDEN);}
 
-        Transaction newTransaction = new Transaction(TransactionType.DEBIT, amount, description , LocalDateTime.now(),true, accountAuthenticated.getBalance());
+        double initialBalance = accountAuthenticated.getBalance();
+
+        Transaction newTransaction = new Transaction(TransactionType.DEBIT, amount, description , LocalDateTime.now(),true, initialBalance);
         accountAuthenticated.addTransaction(newTransaction);
+        newTransaction.setBalanceAfterTransaction(initialBalance - amount);
         transactionService.saveTransaction(newTransaction);
 
         accountAuthenticated.setBalance( accountAuthenticated.getBalance() - amount );
+        clientLoan.setPayments(clientLoan.getPayments()-1);
         clientLoan.setFinalAmount( clientLoan.getFinalAmount() - amount);
 
+        if (clientLoan.getPayments() == 0) {
+            clientLoan.setFinalAmount(0.0);
+        } else {
+            clientLoan.setFinalAmount(clientLoan.getFinalAmount() - amount);
+        }
+
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+    @PostMapping("/api/loans/manager")
+    public ResponseEntity<Object> newLoanAdmin(@RequestBody Loan loan) {
+
+        Loan loan1 = new Loan(loan.getName(), loan.getMaxAmount() , loan.getPayments(),loan.getInterest());
+        loanService.saveLoan(loan1);
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
