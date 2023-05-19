@@ -46,7 +46,7 @@ public class HomebankingApplication {
 			client1.addAccount(account2);
 			repositorys.save(account2);
 
-			Transaction transaction1 = new Transaction( TransactionType.CREDIT,4203.17,"TRAGO", LocalDateTime.now(),true, account1.getBalance() );
+			Transaction transaction1 = new Transaction( TransactionType.CREDIT,4203.17,"TRAGO", LocalDateTime.now().minusDays(10),true, account1.getBalance() );
 			account1.addTransaction(transaction1);
 			transaction.save(transaction1);
 			Transaction transaction2 = new Transaction(TransactionType.DEBIT,3330.37,"HERRAMIENTAS", LocalDateTime.now(),true, account2.getBalance() );

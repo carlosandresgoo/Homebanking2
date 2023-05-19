@@ -9,6 +9,7 @@ createApp({
             FirstName:"",
             lastName:"",
             email:"",
+            isAsideInactive: true,
         }
 
     },
@@ -27,6 +28,9 @@ createApp({
         })
         .catch (err => console.log(err))
         },
+        appearmenu() {
+			this.isAsideInactive = !this.isAsideInactive;
+		},
 
         // addClients(){
         //     axios.post('http://localhost:8080/api/clients', {

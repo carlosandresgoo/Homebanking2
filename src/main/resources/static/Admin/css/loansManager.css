@@ -284,7 +284,23 @@ main {
     min-height: 90vh;
 }
 
-
+.form-managerLoans{
+    background: rgba(255, 255, 255, 0.616);
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 1.5px );
+    -webkit-backdrop-filter: blur( 1.5px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    width:40%;
+    height: 100%;
+    margin: 0 !important;
+}
+.box-loansManager{
+    width: 100%;
+}
+input{
+    border-color: black solid 20px;
+}
 
 body {
     background-image: linear-gradient(to bottom right, #2193b0, #6dd5ed, #ffffff, #bce6eb, #2193b0);

@@ -22,15 +22,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
+import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.stream.Collectors;
 
 
@@ -135,7 +136,7 @@ public class TransactionController {
 
         Document document = new Document();
 
-        PdfWriter.getInstance(document, new FileOutputStream("output.pdf"));
+        PdfWriter.getInstance(document, new FileOutputStream("Transactions-download.pdf"));
         document.open();
 
         Image logo = Image.getInstance("C:\\Tareas mind hub\\Tercera parte del mind hub\\homebanking2\\Homebanking2\\src\\main\\resources\\static\\web\\assets\\logo2.png");
@@ -156,16 +157,20 @@ public class TransactionController {
         subTitle.setSpacingBefore(20);
         document.add(subTitle);
 
-        PdfPTable table = new PdfPTable(5);
+        PdfPTable table = new PdfPTable(6);
         table.setWidthPercentage(100);
-
-        PdfPCell cellAmount = new PdfPCell(new Paragraph("Amount"));
-        cellAmount.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(cellAmount);
 
         PdfPCell cellDate = new PdfPCell(new Paragraph("Date"));
         cellDate.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(cellDate);
+
+        PdfPCell cellTime = new PdfPCell(new Paragraph("Time"));
+        cellTime.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(cellTime);
+
+        PdfPCell cellAmount = new PdfPCell(new Paragraph("Amount"));
+        cellAmount.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(cellAmount);
 
         PdfPCell cellDescription = new PdfPCell(new Paragraph("Description"));
         cellDescription.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -175,27 +180,37 @@ public class TransactionController {
         cellType.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(cellType);
 
-        PdfPCell cellTime = new PdfPCell(new Paragraph("Time"));
-        cellTime.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(cellTime);
+        PdfPCell cellBalance = new PdfPCell(new Paragraph("Balance"));
+        cellType.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(cellBalance);
+
+
 
 
         for (TransactionDTO transactionDTO: transactionsDTOList){
             String date = Utils.getStringDateFromLocalDateTime(transactionDTO.getDate());
             String hour = Utils.getStringHourFromLocalDateTime(transactionDTO.getDate());
 
-            PdfPCell cellTransactionAmount = new PdfPCell(new Paragraph(
-                    transactionDTO.getType().name().equals("DEBIT")? "-" + (NumberFormat.getNumberInstance(Locale.US).format(transactionDTO.getAmount())) : NumberFormat.getNumberInstance(Locale.US).format(transactionDTO.getAmount())));
-            cellTransactionAmount.setHorizontalAlignment(Element.ALIGN_CENTER);
-            cellTransactionAmount.setVerticalAlignment(Element.ALIGN_MIDDLE);
-            cellTransactionAmount.setFixedHeight(50);
-            table.addCell(cellTransactionAmount);
+
 
             PdfPCell cellTransactionDate = new PdfPCell(new Paragraph(date));
             cellTransactionDate.setHorizontalAlignment(Element.ALIGN_CENTER);
             cellTransactionDate.setVerticalAlignment(Element.ALIGN_MIDDLE);
             cellTransactionDate.setFixedHeight(50);
             table.addCell(cellTransactionDate);
+
+            PdfPCell cellTransactionTime = new PdfPCell(new Paragraph(hour));
+            cellTransactionTime.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cellTransactionTime.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cellTransactionTime.setFixedHeight(50);
+            table.addCell(cellTransactionTime);
+
+            PdfPCell cellTransactionAmount = new PdfPCell(new Paragraph(
+                    transactionDTO.getType().name().equals("DEBIT")? "$ - " + (NumberFormat.getNumberInstance(Locale.US).format(transactionDTO.getAmount())) : "$ + "+ NumberFormat.getNumberInstance(Locale.US).format(transactionDTO.getAmount())));
+            cellTransactionAmount.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cellTransactionAmount.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cellTransactionAmount.setFixedHeight(50);
+            table.addCell(cellTransactionAmount);
 
             PdfPCell cellTransactionDescription = new PdfPCell(new Paragraph(transactionDTO.getDescription()));
             cellTransactionDescription.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -209,11 +224,14 @@ public class TransactionController {
             cellTransactionType.setFixedHeight(50);
             table.addCell(cellTransactionType);
 
-            PdfPCell cellTransactionTime = new PdfPCell(new Paragraph(hour));
-            cellTransactionTime.setHorizontalAlignment(Element.ALIGN_CENTER);
-            cellTransactionTime.setVerticalAlignment(Element.ALIGN_MIDDLE);
-            cellTransactionTime.setFixedHeight(50);
-            table.addCell(cellTransactionTime);
+            PdfPCell cellTransactionBalance = new PdfPCell(new Paragraph("$"+NumberFormat.getNumberInstance(Locale.US).format(transactionDTO.getBalanceAfterTransaction())));
+            cellTransactionBalance.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cellTransactionBalance.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cellTransactionBalance.setFixedHeight(50);
+            table.addCell(cellTransactionBalance);
+
+
+
 
         }
         document.add(table);
