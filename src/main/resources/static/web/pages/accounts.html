@@ -38,8 +38,6 @@
                     <a href="../pages/transfers.html"><img
                             class="img-card d-flex flex-column align-items-center mx-auto" src="../assets/transfers.png"
                             alt="My_Cards" title="Cards"> Transfers</a>
-                    <a href="./services.html"><img class="img-services d-flex flex-column align-items-center mx-auto"
-                            src="../assets/public-service.png" alt="Services" title="Services">Services</a>
                     <a href="./contact.html"><img class="img-contact d-flex flex-column align-items-center mx-auto"
                             src="../assets/Customer Support.png" alt="contact" title="Contact">Contact</a>
                     <div class="d-flex flex-column align-items-center justify-content-center" type="button"
@@ -81,8 +79,9 @@
                                     alt="transactions" title="transactions">View transactions</a>
                             <div class="d-flex justify-content-center align-items-center flex-column">
                                 <h6>Delete Account</h6>
-                                <button class="delete-account" @click="deleteAccount(account.id)"><img class="delete-account-img text-center"
-                                        src="../assets/delete.png" alt="delete_account"></button>
+                                <button class="delete-account" @click="deleteAccount(account.id)"><img
+                                        class="delete-account-img text-center" src="../assets/delete.png"
+                                        alt="delete_account"></button>
                             </div>
                         </div>
                     </div>
@@ -106,30 +105,33 @@
                             <img class="loan-icon" src="../assets/loan-icon.png" alt="loans">
                         </template>
                     </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th class="text-center">Loan Type</th>
-                                <th class="text-center">Max amount</th>
-                                <th class="text-center">Final amount</th>
-                                <th class="text-center">Payments</th>
-                                <th class="text-center">Pay Loans</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="dato of loansFilter">
-                                <td class="text-center">{{dato.name}}</td>
-                                <td class="text-center"> $ {{dato.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,
-                                    ",")}}</td>
-                                <td class="text-center">$ {{dato.finalAmount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,
-                                    ",")}}</td>
-                                <td class="text-center">{{dato.payments}}</td>
-                                <td class="text-center"><img src="../assets/payLoans.png" class="payLoans"
-                                        data-bs-toggle="modal" data-bs-target="#exampleModal5"
-                                        @click="filterLoan(dato.name)"></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="box-loans">
+                        <table class="table-loans">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Loan Type</th>
+                                    <th class="text-center">Max amount</th>
+                                    <th class="text-center">Final amount</th>
+                                    <th class="text-center">Payments</th>
+                                    <th class="text-center">Pay Loans</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="dato of loansFilter">
+                                    <td class="text-center">{{dato.name}}</td>
+                                    <td class="text-center"> $ {{dato.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,
+                                        ",")}}</td>
+                                    <td class="text-center">$
+                                        {{dato.finalAmount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,
+                                        ",")}}</td>
+                                    <td class="text-center">{{dato.payments}}</td>
+                                    <td class="text-center"><img src="../assets/payLoans.png" class="payLoans"
+                                            data-bs-toggle="modal" data-bs-target="#exampleModal5"
+                                            @click="filterLoan(dato.name)"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
                 </div>
                 <div class="pt-5 pb-5" v-else>
@@ -426,7 +428,6 @@
                     </div>
                 </div>
             </div>
-            <a href="../../admin/manager.html">manager</a>
         </footer>
     </div>
 
