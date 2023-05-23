@@ -25,26 +25,28 @@
                     <img class="menu" src="../../web/assets/hamburguesa-PhotoRoom.png-PhotoRoom.png"
                         alt="menú-Mind Brother's" title="menú-Mind Brother's" @click="appearmenu">
                 </div>
-            <aside :class="{ inactive: isAsideInactive }" id="aside">
-                <nav class="d-flex flex-column justify-content-center align-items-center">
-                    <a href="../../web/pages/indexClient.html"><img
-                            class="img-home d-flex flex-column align-items-center mx-auto"
-                            src="../../web/assets/home.png" alt="home" title="Home">Home</a>
-                    <a href="../../web/pages/accounts.html"><img
-                            class="img-account d-flex flex-column align-items-center mx-auto"
-                            src="../../web/assets/bank account.png" alt="My_Account" title="account">Accounts</a>
-                    <a href="../../web/pages/cards.html"><img
-                            class="img-card d-flex flex-column align-items-center mx-auto"
-                            src="../../web/assets/cards-debit-credit.png" alt="My_Cards" title="Cards"> Cards</a>
-                    <a href="../../web/pages/transfers.html"><img
-                            class="img-card d-flex flex-column align-items-center mx-auto"
-                            src="../../web/assets/transfers.png" alt="My_Cards" title="Cards"> Transfers</a>
-                    <a class="active" href="#"><img class="img-services d-flex flex-column align-items-center mx-auto"
-                            src="../../web/assets/manager.png" alt="Services" title="Services">Manager</a>
-                    <a href="./pages/loansManager.html"><img class="img-services d-flex flex-column align-items-center mx-auto"
-                            src="../../web/assets/manager.png" alt="Services" title="Services">Create Loans</a>
-                </nav>
-            </aside>
+                <aside :class="{ inactive: isAsideInactive }" id="aside">
+                    <nav class="d-flex flex-column justify-content-center align-items-center">
+                        <a href="../../web/pages/indexClient.html"><img
+                                class="img-home d-flex flex-column align-items-center mx-auto"
+                                src="../../web/assets/home.png" alt="home" title="Home">Home</a>
+                        <a href="../../web/pages/accounts.html"><img
+                                class="img-account d-flex flex-column align-items-center mx-auto"
+                                src="../../web/assets/bank account.png" alt="My_Account" title="account">Accounts</a>
+                        <a href="../../web/pages/cards.html"><img
+                                class="img-card d-flex flex-column align-items-center mx-auto"
+                                src="../../web/assets/cards-debit-credit.png" alt="My_Cards" title="Cards"> Cards</a>
+                        <a href="../../web/pages/transfers.html"><img
+                                class="img-card d-flex flex-column align-items-center mx-auto"
+                                src="../../web/assets/transfers.png" alt="My_Cards" title="Cards"> Transfers</a>
+                        <a class="active" href="#"><img
+                                class="img-services d-flex flex-column align-items-center mx-auto"
+                                src="../../web/assets/manager.png" alt="Services" title="Services">Manager</a>
+                        <a href="./pages/loansManager.html"><img
+                                class="img-services d-flex flex-column align-items-center mx-auto"
+                                src="../../web/assets/manager.png" alt="Services" title="Services">Create Loans</a>
+                    </nav>
+                </aside>
         </header>
 
         <main class="main-pag">
@@ -76,7 +78,7 @@
                 <p class="request">{{datos}}</p>
             </pre>
             </div>
-            <div class="container d-flex flex-column justify-content-center align-item-center col-8">
+            <div class="container box-infoClient d-flex flex-column justify-content-center align-items-center">
                 <h2 class="text-center">Client list</h2>
                 <table class="tabla col-8 ">
                     <thead class="text-center">
