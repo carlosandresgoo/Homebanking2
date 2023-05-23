@@ -21,9 +21,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-import static java.util.stream.Collectors.toList;
-
-
 @RestController
 public class AccountController {
 
@@ -35,21 +32,14 @@ public class AccountController {
         private TransactionService transactionService;
 
 
-        public String randomNumber(){
-                String randomNumber;
-                do {
-                        int number = (int) (Math.random() * 899999 + 100000);
-                        randomNumber = "VIN-" + number;
-                } while (accountService.findByNumber(randomNumber) != null);
-                return randomNumber;
-        }
 
-        @RequestMapping("/api/clients/current/accounts")
+
+        @GetMapping("/api/clients/current/accounts")
         public List<AccountDTO> getAccount(Authentication authentication) {
                 return accountService.getAccount(authentication) ;
         }
 
-        @RequestMapping("/api/clients/current/accounts/{id}")
+        @GetMapping("/api/clients/current/accounts/{id}")
         public AccountDTO getAccount (@PathVariable Long id){
                 return accountService.getAccountDT0(id);
         }
@@ -76,7 +66,7 @@ public class AccountController {
                         return new ResponseEntity<>("Client already has the maximum number of active accounts allowed.", HttpStatus.FORBIDDEN);
                 }
 
-                String accountNumber = randomNumber();
+                String accountNumber = accountService.randomNumber();
                 Account newAccount = new Account(accountNumber, LocalDateTime.now(), 0.0, true, AccountType.valueOf(accountType.toUpperCase()));
                 client.addAccount(newAccount);
                 accountService.saveAccount(newAccount);

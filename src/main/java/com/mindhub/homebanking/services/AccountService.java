@@ -12,6 +12,6 @@ public interface AccountService {
     AccountDTO getAccountDT0(Long id);
     Account findByNumber(String number);
 
-
+    String randomNumber();
     Account findById(Long id);
 }

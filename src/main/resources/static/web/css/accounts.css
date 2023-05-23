@@ -425,13 +425,19 @@ form {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
     height: 50%;
-    width: 90%;
+    width: 80%;
+}
+.box-loans{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 table {
-    width: 100%;
+    width: 80%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin: 0 !important;
 }
 
 th {
@@ -440,11 +446,13 @@ th {
     padding: 10px;
     background-color: #f7f7f7;
     border-bottom: 1px solid #ddd;
+    font-size: .8rem;
 }
 
 td {
     padding: 10px;
     border-bottom: 1px solid #ddd;
+    font-size: .8rem;
 }
 
 tr:nth-child(even) {

@@ -62,13 +62,13 @@ public class WebAuthorization {
 
         http.logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());
 
-//        http.logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler())
-//                .and()
-//                .sessionManagement()
-//                .invalidSessionUrl("/web/pages/signon.html")
-//                .sessionFixation().none()
-//                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-//                .maximumSessions(1);
+        http.logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler())
+                .and()
+                .sessionManagement()
+                .invalidSessionUrl("/web/pages/signon.html")
+                .sessionFixation().none()
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                .maximumSessions(1);
 
                  return http.build();
     }

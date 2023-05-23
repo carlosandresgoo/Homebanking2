@@ -35,6 +35,17 @@ public class AccountServiceImplement implements AccountService {
     }
 
     @Override
+    public String randomNumber() {
+            String randomNumber;
+            do {
+                int number = (int) (Math.random() * 899999 + 100000);
+                randomNumber = "VIN-" + number;
+            } while (accountRepository.findByNumber(randomNumber) != null);
+            return randomNumber;
+        }
+
+
+    @Override
     public Account findById(Long id) {
         return accountRepository.findById(id).orElse(null);
     }

@@ -32,7 +32,7 @@ public class LoanController {
     ClientLoanService clientLoanService;
 
 
-    @RequestMapping("/api/loans")
+    @GetMapping("/api/loans")
     public List<LoanDTO> getLoans() {
         return loanService.getLoanDTO();
     }

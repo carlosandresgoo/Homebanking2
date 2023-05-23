@@ -12,4 +12,9 @@ public interface CardService {
     void saveCard (Card card);
 
     Card findById(long id);
+
+    int randomNumbercvv();
+
+    String generateCardNumber();
+
 }
