@@ -98,7 +98,7 @@
                                 <select class="form-select" aria-label="Default select example" v-model="account"
                                     required>
                                     <option selected class="fs-6" value="">--Open this select menu--</option>
-                                    <template v-for="account of data2.accounts">
+                                    <template v-for="account of activeAccounts">
                                         <option :value="account.number" class="fs-6">{{account.number}}</option>
                                     </template>
                                 </select>

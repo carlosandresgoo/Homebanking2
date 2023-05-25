@@ -8,6 +8,7 @@ createApp({
             account : "",
             amount : "",
             description : "",
+			activeAccounts: [],
 			isAsideInactive: true,
 		};
 	},
@@ -20,6 +21,8 @@ createApp({
 				.get('http://localhost:8080/api/clients/current')
 				.then(response => {
 					this.datos = response.data;
+					this.accounts = this.datos.accounts;
+					this.activeAccounts = this.accounts.filter(account => account.accountActive);
 				})
 				.catch(error => console.log(error));
 		},

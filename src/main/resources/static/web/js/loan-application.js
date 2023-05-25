@@ -17,6 +17,7 @@ createApp({
 			amountInterest: 0,
 			payments:"",
 			quotas: 0,
+			activeAccounts: [],
 			isAsideInactive: true,
 		}
 	},
@@ -35,7 +36,9 @@ createApp({
 		loadData() {
 			axios.get('http://localhost:8080/api/clients/current')
 				.then(response => {
-					this.data2 = response.data
+					this.data2 = response.data;
+					this.accounts = this.data2.accounts;
+					this.activeAccounts = this.accounts.filter(account => account.accountActive);
 				})
 				.catch(error => console.log(error));
 		},
