@@ -37,10 +37,6 @@
                             src="../assets/cards-debit-credit.png" alt="My_Cards" title="Cards"> Cards</a>
                     <a  href="../pages/transfers.html"><img class="img-card d-flex flex-column align-items-center mx-auto"
                             src="../assets/transfers.png" alt="My_Cards" title="Cards"> Transfers</a>
-                    <a href="./services.html"><img class="img-services d-flex flex-column align-items-center mx-auto"
-                            src="../assets/public-service.png" alt="Services" title="Services">Services</a>
-                    <a href="./contact.html"><img class="img-contact d-flex flex-column align-items-center mx-auto"
-                            src="../assets/Customer Support.png" alt="contact" title="Contact">Contact</a>
                     <div class="d-flex flex-column align-items-center justify-content-center" type="button"
                         data-bs-toggle="modal" data-bs-target="#exampleModal3">
                         <img class="img-sign_off d-flex flex-column align-items-center mx-auto"
@@ -59,35 +55,42 @@
                 <div class="encabezado">
                     <h1 class="d-flex justify-content-center align-items-center">TRANSACTIONS</h1>
                 </div>
+                <div class="d-flex justify-content-center align-items-center mt-3">
+                    <button class="btn btn-outline-success createAccountTextSpan fs-5" data-bs-toggle="modal"
+                        data-bs-target="#modal4" >Download PDF</button>
+                </div>
                 <div class=" d-flex justify-content-center align-items-center">
                     <table class="table container my-5">
                         <thead>
                             <tr>
-                                <td class="text-center">Date</td>
-                                <td class="text-center">Amount</td>
-                                <td class="text-center">Description</td>
-                                <td class="text-center">Type</td>
-                                <td class="text-center">Current balance</td>
+                                <td class="text-center title-transaction">Date</td>
+                                <td class="text-center title-transaction">Amount</td>
+                                <td class="text-center title-transaction">Description</td>
+                                <td class="text-center title-transaction">Type</td>
+                                <td class="text-center title-transaction">Current balance</td>
                             </tr>
                         </thead>
                         <tbody>
                             <template v-for="datos of transactions">
                                 <tr :class="datos.type">
-                                    <td class="text-center">{{datos.date.slice(0,10)}} at {{datos.date.slice(11,16)}}
-                                    </td>
-                                    <td class="text-center">$ {{datos.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,
-                                        ",")}}
-                                    </td>
+                                    <td class="text-center">{{datos.date.slice(0,10)}} at {{datos.date.slice(11,16)}}</td>
+                                    <template v-if="datos.type == 'CREDIT'">
+                                        <td class="text-center">+ $ {{datos.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,
+                                            ",")}}</td>
+                                        </template>
+                                        <template v-else>
+                                            <td class="text-center">- $ {{datos.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,
+                                                ",")}}</td>
+                                            </template>
+                                    
                                     <td class="text-center">{{datos.description}}</td>
                                     <td class="text-center">{{datos.type}}</td>
-                                    <td class="text-center">$ {{datos.balanceAfterTransaction.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,
-                                        ",")}}</td>
+                                    <td class="text-center">$ {{datos.balanceAfterTransaction.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,",")}}</td>
                                 </tr>
                             </template>
                         </tbody>
                     </table>
                 </div>
-
                 <!-- boton -->
                 <button id="btn-scroll-top" title="Volver al inicio"><span>↑</span><i
                         class="fa fa-angle-up"></i></button>
@@ -278,6 +281,32 @@
                         </div>
                     </div>
                 </div>
+                <!-- Modal 4 -->
+                <div class="modal fade" id="modal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Download PDF</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form @submit.prevent="downloadPDF">
+                                    <div>                         
+                                        <label class="text-dark" for="start">Start date:</label>                         
+                                        <input class="form-control" type="date" id="start" name="trip-start" min="2000-05-01" max="2100-12-31" v-model="startDate" />                    
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="text-dark" for="start">End date:</label>
+                                        <input class="form-control" type="date" id="start" name="trip-start" min="2000-05-01" max="2100-12-31" v-model="endDate" />
+                                    </div>
+                                    <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Download</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             </main>
 
             <footer class="text-white py-3">
@@ -340,6 +369,7 @@
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
     <script src="../js/account.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

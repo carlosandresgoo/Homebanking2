@@ -7,14 +7,17 @@ createApp({
 			data: [],
 			selectInput: "",
 			checked: "",
-			amount: 0,
+			amount: "",
+			amountModal:0,
 			dataFilter: "",
 			idLoan: "",
 			data2: "",
 			account: "",
 			interestDay: "",
 			amountInterest: 0,
+			payments:"",
 			quotas: 0,
+			activeAccounts: [],
 			isAsideInactive: true,
 		}
 	},
@@ -33,7 +36,9 @@ createApp({
 		loadData() {
 			axios.get('http://localhost:8080/api/clients/current')
 				.then(response => {
-					this.data2 = response.data
+					this.data2 = response.data;
+					this.accounts = this.data2.accounts;
+					this.activeAccounts = this.accounts.filter(account => account.accountActive);
 				})
 				.catch(error => console.log(error));
 		},
@@ -83,6 +88,12 @@ createApp({
 		appearmenu() {
 			this.isAsideInactive = !this.isAsideInactive;
 		},
+		interestRatio(){
+            this.amountModal = this.amount;
+            this.amountInterest = this.amount * 1.2;
+            this.quotas = this.amountInterest / this.selectInput;
+			// this.finalAmount = this.amount*this.dataFilter.interes
+        },
 	},
 }).mount("#app");
 

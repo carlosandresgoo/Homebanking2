@@ -33,6 +33,24 @@ public class AccountServiceImplement implements AccountService {
     public Account findByNumber(String number) {
         return accountRepository.findByNumber(number);
     }
+
+    @Override
+    public String randomNumber() {
+            String randomNumber;
+            do {
+                int number = (int) (Math.random() * 899999 + 100000);
+                randomNumber = "VIN-" + number;
+            } while (accountRepository.findByNumber(randomNumber) != null);
+            return randomNumber;
+        }
+
+
+    @Override
+    public Account findById(Long id) {
+        return accountRepository.findById(id).orElse(null);
+    }
+
+
     @Override
     public AccountDTO getAccountDT0(Long id) {
         return accountRepository.findById(id).map(account -> new AccountDTO(account)).orElse(null);

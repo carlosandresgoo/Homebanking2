@@ -1,26 +1,21 @@
 package com.mindhub.homebanking.Controllers;
 import com.mindhub.homebanking.dto.AccountDTO;
-import com.mindhub.homebanking.dto.ClientDTO;
 import com.mindhub.homebanking.models.Account;
 import com.mindhub.homebanking.models.AccountType;
 import com.mindhub.homebanking.models.Client;
 import com.mindhub.homebanking.models.Transaction;
-import com.mindhub.homebanking.repositories.AccountRepository;
-import com.mindhub.homebanking.repositories.ClientRepository;
-import com.mindhub.homebanking.repositories.TransactionRepository;
 import com.mindhub.homebanking.services.AccountService;
 import com.mindhub.homebanking.services.ClientService;
+import com.mindhub.homebanking.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
-
-
-import static java.util.stream.Collectors.toList;
 
 
 @RestController
@@ -31,27 +26,32 @@ public class AccountController {
         @Autowired
         private AccountService accountService;
         @Autowired
-        private AccountRepository accountRepository;
-        @Autowired
-        private TransactionRepository transactionRepository;
+        private TransactionService transactionService;
 
-        public String randomNumber(){
-                String randomNumber;
-                do {
-                        int number = (int) (Math.random() * 899999 + 100000);
-                        randomNumber = "VIN-" + number;
-                } while (accountService.findByNumber(randomNumber) != null);
-                return randomNumber;
-        }
 
-        @RequestMapping("/api/clients/current/accounts")
+
+
+        @GetMapping("/api/clients/current/accounts")
         public List<AccountDTO> getAccount(Authentication authentication) {
                 return accountService.getAccount(authentication) ;
         }
 
-        @RequestMapping("/api/clients/current/accounts/{id}")
-        public AccountDTO getAccount (@PathVariable Long id){
-                return accountService.getAccountDT0(id);
+        @GetMapping("/api/clients/current/accounts/{id}")
+        public ResponseEntity<AccountDTO> getAccount(@PathVariable Long id, Authentication authentication) {
+                String authenticatedUsername = authentication.getName();
+                Client client = clientService.findByEmail(authenticatedUsername);
+                if (client == null) {
+                        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+                }
+                Account account = accountService.findById(id);
+                if (account == null) {
+                        return ResponseEntity.notFound().build();
+                }
+                if (account.getClient().getId() != client.getId()) {
+                        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
+                }
+                AccountDTO accountDTO = new AccountDTO(account);
+                return ResponseEntity.ok(accountDTO);
         }
 
 
@@ -76,7 +76,7 @@ public class AccountController {
                         return new ResponseEntity<>("Client already has the maximum number of active accounts allowed.", HttpStatus.FORBIDDEN);
                 }
 
-                String accountNumber = randomNumber();
+                String accountNumber = accountService.randomNumber();
                 Account newAccount = new Account(accountNumber, LocalDateTime.now(), 0.0, true, AccountType.valueOf(accountType.toUpperCase()));
                 client.addAccount(newAccount);
                 accountService.saveAccount(newAccount);
@@ -91,7 +91,7 @@ public class AccountController {
                 if (client == null) {
                         return new ResponseEntity<>("You can't delete an account because you're not a client.", HttpStatus.FORBIDDEN);
                 }
-                Account account = accountRepository.findById(id);
+                Account account = accountService.findById(id);
                 if (account == null) {
                         return new ResponseEntity<>("Account not found", HttpStatus.NOT_FOUND);
                 }
@@ -100,12 +100,12 @@ public class AccountController {
                 }
 
                 account.setAccountActive(false);
-                accountRepository.save(account);
+                accountService.saveAccount(account);
 
-                List<Transaction> transactions = transactionRepository.findByAccountId(id);
+                List<Transaction> transactions = transactionService.findById(id);
                 transactions.forEach(transaction -> {
                         transaction.setTransactionActive(false);
-                        transactionRepository.save(transaction);
+                        transactionService.saveTransaction(transaction);
                 });
                 return new ResponseEntity<>(HttpStatus.OK);
         }

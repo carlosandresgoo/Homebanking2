@@ -29,7 +29,7 @@
             </div>
             <aside :class="{ inactive: isAsideInactive }" id="aside">
                 <nav class="d-flex flex-column justify-content-center align-items-center">
-                    <a href="../../index.html"><img class="img-home d-flex flex-column align-items-center mx-auto"
+                    <a href="../../web/pages/indexClient.html"><img class="img-home d-flex flex-column align-items-center mx-auto"
                             src="../assets/home.png" alt="home" title="Home">Home</a>
                     <a href="./accounts.html"><img class="img-account d-flex flex-column align-items-center mx-auto"
                             src="../assets/bank account.png" alt="My_Account" title="account">Accounts</a>
@@ -38,10 +38,6 @@
                     <a class="active" href="../pages/transfers.html"><img
                             class="img-card d-flex flex-column align-items-center mx-auto" src="../assets/transfers.png"
                             alt="My_Cards" title="Cards"> Transfers</a>
-                    <a href="./services.html"><img class="img-services d-flex flex-column align-items-center mx-auto"
-                            src="../assets/public-service.png" alt="Services" title="Services">Services</a>
-                    <a href="./contact.html"><img class="img-contact d-flex flex-column align-items-center mx-auto"
-                            src="../assets/Customer Support.png" alt="contact" title="Contact">Contact</a>
                     <div class="d-flex flex-column align-items-center justify-content-center" type="button"
                         data-bs-toggle="modal" data-bs-target="#exampleModal3">
                         <img class="img-sign_off d-flex flex-column align-items-center mx-auto"
@@ -55,29 +51,6 @@
         <main>
             {{upperCase}}
             <h1 class="text-center my-4">Transfers</h1>
-
-            <!-- <div id="carousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-pause="false">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="" class="d-block w-100" alt="Hawai 1">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="" class="d-block w-100" alt="Hawaii 2">
-                    </div>
-                    <div class="overlay">
-                        <div class="container">
-                            <div class="row justify-content-center align-items-center">
-                                <div class="col-md-6 text-center">
-                                    <h1>Important Information</h1>
-                                    <p class="fs-5 mb-0"><span class="text-danger fs-3">!Please¡</span> pay attention in
-                                        the destination account number,</p>
-                                    <p class="fs-5 mt-1">With this we can reduce posibble delays in your transfers.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
             <!-- /*                 FORM                 */ -->
             <div class="carrouselTransfer mt-5 pb-5">
                 <div class="buttons d-flex justify-content-center align-items-center gap-2">
@@ -102,9 +75,9 @@
                                         <label for="accountTransfer" class="form-label">Your Account*</label>
                                         <select class="form-select mb-3" aria-label="Default select example"
                                             v-model="account" required id="accountTransfer">
-                                            <option  class="fs-6" value="">Open this select menu</option>
-                                            <template v-for="account of datos.accounts">
-                                                <option  :value="account.number" class="fs-6">{{account.number}}</option>
+                                            <option class="fs-6" value="">Open this select menu</option>
+                                            <template v-for="account of activeAccounts">
+                                                <option :value="account.number" class="fs-6">{{account.number}}</option>
                                             </template>
                                         </select>
                                     </div>
@@ -113,7 +86,7 @@
                                         <select class="form-select mb-3" aria-label="Default select example"
                                             v-model="destinateAccount" required>
                                             <option selected class="fs-6" value="">Open this select menu</option>
-                                            <template v-for="account of datos.accounts">
+                                            <template v-for="account of activeAccounts">
                                                 <option :value="account.number" class="fs-6">{{account.number}}</option>
                                             </template>
                                         </select>
@@ -129,7 +102,10 @@
                                         <textarea class="form-control" id="description" rows="3"
                                             v-model="description"></textarea>
                                     </div>
-                                    <button type="submit" class="btn btn-primary" id="boton-transfers">Transfer</button>
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <button type="submit" class="btn btn-primary"
+                                            id="boton-transfers">Transfer</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>

@@ -2,9 +2,11 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+
 }
 
-/*Header */
+/* Header */
+
 .inactive {
     display: none;
 }
@@ -25,37 +27,37 @@ aside {
     transition: all 0.6s ease-in-out;
     transform: scale(1);
     transition: all 0.5s ease-in-out;
-	animation-name: slidein;
-	animation-duration: 0.5s;
-	animation-fill-mode: forwards;
+    animation-name: slidein;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
 }
 
-
 .aparecermenu {
-	right: 0;
+    right: 0;
 }
 
 .menu {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 @keyframes slidein {
-	from {
-		right: -50px;
-	}
+    from {
+        right: -50px;
+    }
 
-	to {
-		right: 0;
-	}
+    to {
+        right: 0;
+    }
 }
-@keyframes slideout {
-	from {
-		right: 0;
-	}
 
-	to {
-		right: -250px;
-	}
+@keyframes slideout {
+    from {
+        right: 0;
+    }
+
+    to {
+        right: -250px;
+    }
 }
 
 .navbar-aside {
@@ -89,20 +91,24 @@ aside {
     z-index: 9999;
     transition: all 0.3s ease-in-out;
 }
-nav a{
+
+nav a {
     text-decoration: none;
 }
+
 a.active {
-	border-bottom: solid rgba(10, 38, 71, 0.884) 2px;
+    border-bottom: solid rgba(10, 38, 71, 0.884) 2px;
 }
 
 .menu.active~.navbar {
     right: 0;
 }
-.box-nav{
+
+.box-nav {
     height: 6rem;
 }
-.box-logo2{
+
+.box-logo2 {
     height: 10rem;
     background-color: rgba(255, 255, 255, 0.603);
     width: 12rem;
@@ -110,8 +116,9 @@ a.active {
     border-radius: 50rem;
     margin-top: 0.3rem;
 }
-.logo-2{
-    height:10rem;
+
+.logo-2 {
+    height: 10rem;
     width: 12rem;
     margin-right: 60rem;
     object-fit: contain;
@@ -123,7 +130,8 @@ a.active {
     margin-top: 2rem;
     cursor: pointer;
 }
-h3{
+
+h3 {
     height: 4rem;
 }
 
@@ -133,6 +141,7 @@ h3{
     margin-top: 1rem;
     cursor: pointer;
 }
+
 .img-card {
     width: 2.2rem;
     height: 2.2rem;
@@ -191,6 +200,7 @@ h3{
         transform: scale(1.2);
     }
 }
+
 /* Animación para la imagen "Cards" */
 .img-card:hover {
     animation: pulse 0.5s linear infinite alternate;
@@ -250,62 +260,52 @@ h3{
         transform: scale(1.2);
     }
 }
-body {
-    background-image: linear-gradient(to bottom right, #2193b0, #6dd5ed, #ffffff, #bce6eb, #2193b0);
-    background-repeat: no-repeat;
-    background-size: cover;
+
+.box-logo2 {
+    height: 10rem;
+    background-color: rgba(255, 255, 255, 0.603);
+    width: 12rem;
+    margin-right: 60rem;
+    border-radius: 50rem;
+    margin-top: 0.3rem;
+}
+
+.logo-2 {
+    height: 10rem;
+    width: 12rem;
+    margin-right: 60rem;
+    object-fit: contain;
 }
 
 
 /* Main */
 
 main {
-    min-height: 75vh;
+    min-height: 90vh;
 }
 
-.card-body{
-    background-color: rgba(255, 255, 255, 0.281);
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-}
-.createCardsDiv{
-    height: 98vh;
-    object-fit: cover;
-}
-
-/*form*/
-.glassmorphism{
-    background: rgba(255, 255, 255, 0.37);
+.form-managerLoans{
+    background: rgba(255, 255, 255, 0.616);
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
     backdrop-filter: blur( 1.5px );
     -webkit-backdrop-filter: blur( 1.5px );
     border-radius: 10px;
     border: 1px solid rgba( 255, 255, 255, 0.18 );
-    width: 100%;
+    width:40%;
     height: 100%;
+    margin: 0 !important;
+}
+.box-loansManager{
+    width: 100%;
+}
+input{
+    border-color: black solid 20px;
 }
 
-form{
-    width: 80%;
-}
-
-.btn-register{
-    background-color: #0066cc7c !important;
-    border: 1px solid white;
-    color: white;
-}
-
-.btn-register:hover {
-    border: 1px solid white;
-    color: white;
-}
-
-select{
-    width: 100% !important;
-}
-
-input::-webkit-outer-spin-button , input::-webkit-inner-spin-button{
-    -webkit-appearance: none !important;
-    margin: 0;
+body {
+    background-image: linear-gradient(to bottom right, #2193b0, #6dd5ed, #ffffff, #bce6eb, #2193b0);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 /*--------------------------------------------------------boton que lleva al inicio-----------------------------------------------------------*/
@@ -339,6 +339,7 @@ input::-webkit-outer-spin-button , input::-webkit-inner-spin-button{
 #letra-justify {
     text-align: justify;
 }
+
 .modal-body {
     overflow-y: auto;
     max-height: 400px;
@@ -349,11 +350,13 @@ input::-webkit-outer-spin-button , input::-webkit-inner-spin-button{
     border-bottom: white solid 1px;
 
 }
-.cards-2{
-    height: 2.5rem;
-    width: 2.5rem;
+
+.click {
+    height: 3rem;
+    width: 3rem;
 }
-.cards-2:hover {
+
+.click:hover {
     animation: pulse 0.5s linear infinite alternate;
 }
 
@@ -366,6 +369,7 @@ input::-webkit-outer-spin-button , input::-webkit-inner-spin-button{
         transform: scale(1.2);
     }
 }
+
 .loading-container {
     position: fixed;
     top: 0;
@@ -388,7 +392,8 @@ input::-webkit-outer-spin-button , input::-webkit-inner-spin-button{
     border-top-color: #09f;
     animation: spin 1s ease-in-out infinite;
 }
-.img-loading{
+
+.img-loading {
     height: 25rem;
     height: 25rem;
 }
@@ -399,102 +404,34 @@ input::-webkit-outer-spin-button , input::-webkit-inner-spin-button{
     }
 }
 
+@media only screen and (min-width: 375px) and (max-width: 1023px){
 
-/* Footer*/
+    aside {
+        margin: 0 !important;
+        margin-top: 5rem;
+        position: absolute;
+        right: 0;
+        top: 6rem;
+        background-size: cover;
+        object-fit: cover;
+        width: 100%;
+        height: 200%;
+        z-index: 10;
+        border-radius: 0;
+        background-color: #7bd1e600;
+        transition: all 0.6s ease-in-out;
+        transform: scale(1);
+        transition: all 0.5s ease-in-out;
+        animation-name: slidein;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+        background-color: rgba(255, 255, 255, 0.973);
+    }
 
-footer {
-    background-color: rgba(10, 38, 71, 0.884);
-    color: #fff;
-    font-size: 14px;
-}
-
-footer a {
-    color: #fff;
-}
-
-footer a:hover {
-    color: #ddd;
-}
-
-footer h5 {
-    font-size: 16px;
-    margin-bottom: 15px;
-    text-transform: uppercase;
-}
-
-footer ul {
-    list-style: none;
-    padding: 0;
-}
-
-footer ul li {
-    margin-bottom: 10px;
-}
-
-footer ul li a {
-    font-weight: bold;
-}
-
-footer p {
-    margin-bottom: 15px;
-}
-
-footer .fa {
-    margin-right: 10px;
-    font-size: 18px;
-}
-
-footer .fab {
-    color: #fff;
-}
-
-footer .fab:hover {
-    color: #ddd;
-}
-
-footer .col-md-4 {
-    margin-bottom: 30px;
-}
-
-footer .mt-3 {
-    margin-top: 20px;
-}
-
-footer p:last-child {
-    margin-bottom: 0;
-}
-
-@media (max-width: 768px) {
-    footer .col-md-4 {
-        margin-bottom: 50px;
+    .form-managerLoans{
+        width: 90%;
+        
     }
 }
 
-.img-ins {
-    height: 2rem;
-    width: 2rem;
-    margin-left: .5rem;
-}
-
-.img-face {
-    height: 2rem;
-    width: 2rem;
-    margin-left: .5rem;
-}
-
-.img-git {
-    height: 2rem;
-    width: 2rem;
-    margin-left: .5rem;
-}
-
-.img-In {
-    height: 2rem;
-    width: 2rem;
-    margin-left: .5rem;
-}
-
-.me-name {
-    font-size: 1rem;
-}
 

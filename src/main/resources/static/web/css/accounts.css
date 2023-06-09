@@ -413,6 +413,11 @@ form {
     object-fit: contain;
 }
 
+.delete-account-img{
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
 /* card loans */
 .card-loan {
     background-color: #fff;
@@ -420,13 +425,19 @@ form {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
     height: 50%;
-    width: 90%;
+    width: 80%;
+}
+.box-loans{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 table {
-    width: 100%;
+    width: 80%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin: 0 !important;
 }
 
 th {
@@ -435,11 +446,13 @@ th {
     padding: 10px;
     background-color: #f7f7f7;
     border-bottom: 1px solid #ddd;
+    font-size: .8rem;
 }
 
 td {
     padding: 10px;
     border-bottom: 1px solid #ddd;
+    font-size: .8rem;
 }
 
 tr:nth-child(even) {
@@ -469,6 +482,10 @@ body {
 
 h5 a {
     text-decoration: none;
+}
+.payLoans{
+    height: 3rem;
+    width: 3rem;
 }
 
 
@@ -664,4 +681,160 @@ footer p:last-child {
 
 .me-name {
     font-size: 1rem;
+}
+@media only screen and (min-width: 375px) and (max-width: 424px){
+    aside {
+        margin: 0 !important;
+        position: absolute;
+        right: 0;
+        top: 6rem;
+        background-size: cover;
+        object-fit: cover;
+        width: 100%;
+        height: 278%;
+        z-index: 10;
+        border-radius: 0;
+        background-color: #7bd1e600;
+        transition: all 0.6s ease-in-out;
+        transform: scale(1);
+        transition: all 0.5s ease-in-out;
+        animation-name: slidein;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+        background-color: rgba(255, 255, 255, 0.973);
+    }
+    .card-loan{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .table-loans{
+        text-align: center;
+        margin: 0 !important;
+    }
+    .box-loans{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+    th{
+        height: 1rem;
+        width: 1rem;
+        font-size: .5rem;
+    }
+    td{
+        height: 1rem;
+        width: 1rem;
+        font-size: .5rem;
+    }
+    .payLoans{
+        height: 1rem;
+        width: 1rem;
+    }
+
+}
+@media only screen and (min-width: 425px) and (max-width: 767px){
+    aside {
+        margin: 0 !important;
+        position: absolute;
+        right: 0;
+        top: 6rem;
+        background-size: cover;
+        object-fit: cover;
+        width: 100%;
+        height: 278%;
+        z-index: 10;
+        border-radius: 0;
+        background-color: #7bd1e600;
+        transition: all 0.6s ease-in-out;
+        transform: scale(1);
+        transition: all 0.5s ease-in-out;
+        animation-name: slidein;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+        background-color: rgba(255, 255, 255, 0.973);
+    }
+    .card-loan{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .table-loans{
+        text-align: center;
+        margin: 0 !important;
+    }
+    .box-loans{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+    th{
+        height: 1rem;
+        width: 1rem;
+        font-size: .6rem;
+    }
+    td{
+        height: 1rem;
+        width: 1rem;
+        font-size: .6rem;
+    }
+    .payLoans{
+        height: 1rem;
+        width: 1rem;
+    }
+
+}
+@media only screen and (min-width: 768px) and (max-width: 1023px){
+    aside {
+        margin: 0 !important;
+        position: absolute;
+        right: 0;
+        top: 6rem;
+        background-size: cover;
+        object-fit: cover;
+        width: 100%;
+        height: 278%;
+        z-index: 10;
+        border-radius: 0;
+        background-color: #7bd1e600;
+        transition: all 0.6s ease-in-out;
+        transform: scale(1);
+        transition: all 0.5s ease-in-out;
+        animation-name: slidein;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+        background-color: rgba(255, 255, 255, 0.973);
+    }
+    .card-loan{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .table-loans{
+        text-align: center;
+        margin: 0 !important;
+    }
+    .box-loans{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+    th{
+        height: 1rem;
+        width: 1rem;
+        font-size: .8rem;
+    }
+    td{
+        height: 1rem;
+        width: 1rem;
+        font-size: .8rem;
+    }
+    .payLoans{
+        height: 1rem;
+        width: 1rem;
+    }
+
 }

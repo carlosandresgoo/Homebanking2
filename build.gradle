@@ -23,6 +23,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	runtimeOnly 'com.h2database:h2'
 //	implementation 'org.postgresql:postgresql'
+	implementation 'com.itextpdf:itextpdf:5.5.13.3'
+	implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 }

@@ -17,8 +17,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
-import static java.util.stream.Collectors.toList;
-
 
 @RestController
 public class ClientController {
@@ -29,31 +27,20 @@ public class ClientController {
     private ClientService clientService;
     @Autowired
     private AccountService accountService;
-    @Autowired
-    private AccountRepository accountRepository;
 
 
-    public String randomNumber(){
-        String randomNumber;
-        do {
-            int number = (int) (Math.random() * 899999 + 100000);
-            randomNumber = "VIN-" + number;
-        } while (accountService.findByNumber(randomNumber) != null);
-        return randomNumber;
-    }
-
-    @RequestMapping("/api/clients")
+    @GetMapping("/api/clients")
     public List<ClientDTO> getClient() {
         return clientService.getClient();
     }
 
-    @RequestMapping("/api/clients/current")
+    @GetMapping("/api/clients/current")
     public ClientDTO getClients(Authentication authentication) {
         return clientService.getClients(authentication);
     }
 
 
-    @RequestMapping(path = "/api/clients", method = RequestMethod.POST)
+    @PostMapping("/api/clients")
 
     public ResponseEntity<Object> register(
             @RequestParam String firstName, @RequestParam String lastName,
@@ -86,7 +73,7 @@ public class ClientController {
         }
         Client newClient = new Client(firstName, lastName, email, passwordEncoder.encode(password));
         clientService.saveClient(newClient);
-        String accountNumber = randomNumber();
+        String accountNumber = accountService.randomNumber();
         Account newAccount = new Account(accountNumber, LocalDateTime.now(), 0.0,true, AccountType.SAVING);
         newClient.addAccount(newAccount);
         accountService.saveAccount(newAccount);

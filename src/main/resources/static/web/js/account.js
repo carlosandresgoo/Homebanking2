@@ -7,6 +7,9 @@ createApp({
 			transactions: [],
 			type:"",
 			description:"",
+			totalBalance: 0,
+			startDate: "",
+			endDate: "",
 			isAsideInactive: true,
 			id: new URLSearchParams(location.search).get('id'),
 		};
@@ -29,6 +32,34 @@ createApp({
 		})
 				.catch(error => console.log(error));
 		},
+        downloadPDF(){
+            Swal.fire({
+                title: 'Confirm that you want to download your transactions in PDF',
+                inputAttributes: {
+                    autocapitalize: 'off'
+                },
+                showCancelButton: true,
+                confirmButtonText: 'Sure',
+                preConfirm: () => {
+                    return axios.post('/accounts/transactions/pdf',`id=${this.id}&startDate=${this.startDate}&endDate=${this.endDate}`)
+                    .then(response => {
+                        Swal.fire({
+                            icon: 'success',
+                            text: 'Please search in your documents',
+                            showConfirmButton: false,
+                            timer: 3000,
+                        }).then( () => window.location.href="/web/pages/accounts.html")
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            icon: 'error',
+                            text: error.response.data,
+                        })
+                    })    
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            })
+        },
 		logout(){
 			axios.post("/api/logout")
 			.then(response => window.location.href = "/web/pages/signon.html" )

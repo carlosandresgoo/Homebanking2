@@ -32,10 +32,40 @@ public class CardServiceImplement implements CardService {
         cardRepository.save(card);
     }
 
+    @Override
+    public Card findById(long id) {
+        return cardRepository.findById(id);
+    }
+
+    @Override
+    public int randomNumbercvv() {
+            int cardnumber;
+            cardnumber = (int) (Math.random() * 899 + 100);
+            return cardnumber;
+        }
+
+    @Override
+    public String generateCardNumber() {
+            String cardNumber;
+            do {
+                int firstGroup = (int) (Math.random() * 8999 + 1000);
+                int secondGroup = (int) (Math.random() * 8999 + 1000);
+                int thirdGroup = (int) (Math.random() * 8999 + 1000);
+                int fourthGroup = (int) (Math.random() * 8999 + 1000);
+                cardNumber = firstGroup + "-" + secondGroup + "-" + thirdGroup + "-" + fourthGroup;
+            } while (cardRepository.findByNumber(cardNumber) != null);
+            return cardNumber;
+        }
 
 
 
     }
+
+
+
+
+
+
 
 
 

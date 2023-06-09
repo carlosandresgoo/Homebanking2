@@ -2,19 +2,320 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+}
+/* Header */
+
+.inactive {
+    display: none;
+}
+
+aside {
+    margin-top: 5rem;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-size: cover;
+    object-fit: cover;
+    width: 8%;
+    height: 75%;
+    z-index: 10;
+    border-radius: 1rem;
+    background-color: #7bd1e600;
+    margin-right: .5rem;
+    transition: all 0.6s ease-in-out;
+    transform: scale(1);
+    transition: all 0.5s ease-in-out;
+    animation-name: slidein;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+.aparecermenu {
+    right: 0;
+}
+
+.menu {
+    cursor: pointer;
+}
+
+@keyframes slidein {
+    from {
+        right: -50px;
+    }
+
+    to {
+        right: 0;
+    }
+}
+
+@keyframes slideout {
+    from {
+        right: 0;
+    }
+
+    to {
+        right: -250px;
+    }
+}
+
+.navbar-aside {
+    width: auto;
+    margin: 0 !important;
+}
+
+.menu {
+    height: 4rem;
+    width: 4rem;
+    margin-right: 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.menu:hover {
+    transform: scale(1.1);
+}
+
+.menu.active {
+    transform: rotate(45deg);
+}
+
+.navbar {
+    position: absolute;
+    top: 0;
+    right: -100%;
+    width: 20rem;
+    height: 100vh;
+    background-color: #fff;
+    z-index: 9999;
+    transition: all 0.3s ease-in-out;
+}
+
+nav a {
+    text-decoration: none;
+}
+
+a.active {
+    border-bottom: solid rgba(10, 38, 71, 0.884) 2px;
+}
+
+.menu.active~.navbar {
+    right: 0;
+}
+
+.box-nav {
+    height: 6rem;
+}
+
+.box-logo2 {
+    height: 10rem;
+    background-color: rgba(255, 255, 255, 0.603);
+    width: 12rem;
+    margin-right: 60rem;
+    border-radius: 50rem;
+    margin-top: 0.3rem;
+}
+
+.logo-2 {
+    height: 10rem;
+    width: 12rem;
+    margin-right: 60rem;
+    object-fit: contain;
+}
+
+.img-home {
+    height: 2.2rem;
+    width: 2.2rem;
+    margin-top: 2rem;
+    cursor: pointer;
+}
+
+h3 {
+    height: 4rem;
+}
+
+.img-account {
+    width: 2.2rem;
+    height: 2.2rem;
+    margin-top: 1rem;
+    cursor: pointer;
+}
+
+.img-card {
+    width: 2.2rem;
+    height: 2.2rem;
+    margin-top: 1rem;
+    cursor: pointer;
+}
+
+
+.img-services {
+    width: 2.2rem;
+    height: 2.2rem;
+    margin-top: 1rem;
+    cursor: pointer;
+}
+
+.img-sign_off {
+    width: 2.2rem;
+    height: 2.2rem;
+    margin-top: 1rem;
+    cursor: pointer;
+}
+
+.img-contact {
+    width: 2.2rem;
+    height: 2.2rem;
+    margin-top: 1rem;
+    cursor: pointer;
+}
+
+/* Animación para la imagen "home" */
+.img-home:hover {
+    animation: pulse 0.5s linear infinite alternate;
+}
+
+@keyframes pulse {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.2);
+    }
+}
+
+/* Animación para la imagen "account" */
+.img-account:hover {
+    animation: pulse 0.5s linear infinite alternate;
+}
+
+@keyframes pulse {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.2);
+    }
+}
+
+/* Animación para la imagen "Cards" */
+.img-card:hover {
+    animation: pulse 0.5s linear infinite alternate;
+}
+
+@keyframes pulse {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.2);
+    }
+}
+
+/* Animación para la imagen "services" */
+.img-services:hover {
+    animation: pulse 0.5s linear infinite alternate;
+}
+
+@keyframes pulse {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.2);
+    }
+}
+
+/* Animación para la imagen "sign off" */
+.img-sign_off:hover {
+    animation: pulse 0.5s linear infinite alternate;
+}
+
+@keyframes pulse {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.2);
+    }
+}
+
+/* Animación para la imagen "contact" */
+.img-contact:hover {
+    animation: pulse 0.5s linear infinite alternate;
+}
+
+@keyframes pulse {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.2);
+    }
+}
+
+.box-logo2 {
+    height: 10rem;
+    background-color: rgba(255, 255, 255, 0.603);
+    width: 12rem;
+    margin-right: 60rem;
+    border-radius: 50rem;
+    margin-top: 0.3rem;
+}
+
+.logo-2 {
+    height: 10rem;
+    width: 12rem;
+    margin-right: 60rem;
+    object-fit: contain;
+}
+
+
+
+
+/* Main */
+
+.index-home {
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -1;
+    min-height: 100vh;
+}
+
+body {
+    background-image: linear-gradient(to bottom right, #2193b0, #6dd5ed, #ffffff, #bce6eb, #2193b0);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.main-pag{
+    min-height: 100vh;
+}
+
+.box-img {
+    padding: 0 !important;
+    height: 100 vh;
+    background-color: rgba(255, 255, 255, 0.767);
 
 }
-header{
-    background: linear-gradient(to bottom, #87CEFA, #DCDCDC);
+
+.navbar {
+    height: 100 vh;
+    margin: 0;
 }
-main {
-    min-height: 90vh;
-    background: linear-gradient(to bottom, #87CEFA, #DCDCDC);
+
+.logo {
+    height: 18rem;
+    width: 25rem;
+    background-size: cover;
 
 }
-.nav-manager a{
-    margin: 2rem;
-}
+
 
 table {
     width: 30em;
@@ -60,59 +361,49 @@ form {
     width: 50%;
 }
 
-/* header index */
+@media only screen and (min-width: 375px) and (max-width: 1023px){
 
-.icon-nav {
-    width: 4rem;
-    height: 4rem;
+    aside {
+        margin: 0 !important;
+        margin-top: 5rem;
+        position: absolute;
+        right: 0;
+        top: 6rem;
+        background-size: cover;
+        object-fit: cover;
+        width: 100%;
+        height: 200%;
+        z-index: 10;
+        border-radius: 0;
+        background-color: #7bd1e600;
+        transition: all 0.6s ease-in-out;
+        transform: scale(1);
+        transition: all 0.5s ease-in-out;
+        animation-name: slidein;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+        background-color: rgba(255, 255, 255, 0.973);
+    }
+    form{
+        margin: 0 !important;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    table{
+        margin: 0 !important;
+    }
+    .box-infoClient{
+        margin: 0 !important;
+        width: 100%;
+
+    }
+    #pre-1{
+        margin: 0 !important;
+        margin-top: 1rem;
+    }
+    button{
+        margin-bottom: 2rem;
+    }
 }
 
-
-/* Main */
-
-.index-home {
-    background-image: url(../assets/fondo1.jpeg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    z-index: -1;
-    min-height: 100vh;
-}
-
-.main-pag{
-    min-height: 100vh;
-}
-
-.box-img {
-    padding: 0 !important;
-    height: 100 vh;
-    background-color: rgba(255, 255, 255, 0.767);
-
-}
-
-.navbar {
-    height: 100 vh;
-    margin: 0;
-}
-
-.logo {
-    height: 18rem;
-    width: 25rem;
-    background-size: cover;
-
-}
-
-a{
-    font-size: 2 rem;
-    font-weight: bolder;
-}
-
-/* Transaction */
-.DEBIT {
-	color: red !important;
-}
-.CREDIT {
-	color: green !important;
-}
-
-
-/* footer */

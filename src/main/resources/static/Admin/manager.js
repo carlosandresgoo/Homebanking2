@@ -9,6 +9,7 @@ createApp({
             FirstName:"",
             lastName:"",
             email:"",
+            isAsideInactive: true,
         }
 
     },
@@ -20,13 +21,16 @@ createApp({
     methods:{
 
         loadDate(){
-            axios.get('http://localhost:8080/api/clients/')
+            axios.get('http://localhost:8080/api/clients')
             .then(response => {
             this.datos = response.data;
             console.log(this.datos);
         })
         .catch (err => console.log(err))
         },
+        appearmenu() {
+			this.isAsideInactive = !this.isAsideInactive;
+		},
 
         // addClients(){
         //     axios.post('http://localhost:8080/api/clients', {
@@ -56,15 +60,15 @@ createApp({
 }).mount ('#app')
 
 
-// loading//
-const loadingContainer = document.getElementById("loading-container");
-function showLoading() {
-	loadingContainer.style.display = "flex";
-}
-function hideLoading() {
-	loadingContainer.style.display = "none";
-}
-showLoading();
-window.addEventListener("load", () => {
-	hideLoading();
-});
+// // loading//
+// const loadingContainer = document.getElementById("loading-container");
+// function showLoading() {
+// 	loadingContainer.style.display = "flex";
+// }
+// function hideLoading() {
+// 	loadingContainer.style.display = "none";
+// }
+// showLoading();
+// window.addEventListener("load", () => {
+// 	hideLoading();
+// });
