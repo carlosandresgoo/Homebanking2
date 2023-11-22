@@ -27,6 +27,7 @@ dependencies {
 	implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
 }
 
 tasks.named('test') {
